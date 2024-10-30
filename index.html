@@ -26,12 +26,12 @@
         </nav>
     </header>
 
-    <main class="container mt-5">
+    <main class="container mt-2">
         <section class="row justify-content-center">
             <div class="col-md-5 col-lg-4 col-sm-6 col-9">
                 <h4 class="fw-bold text-start">BANK</h4>
                 <div class="fs-3 border rounded border-dark text-center p-2">
-                    <p id="bankBalance">$100</p>
+                    <div id="bankBalance"></div>
                 </div>
         </section>
 
@@ -57,33 +57,37 @@
         <section class=" row justify-content-center p-3 text-center mt-3">
             <div class="col-6 mt-3">
                 <div class="row justify-content-center mx-3">
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam1(5)" class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 5
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam1(25)" class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 25
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam1(100)"
+                        class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 100
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
-                        Bet All
+                    <button onclick="betTeam1(bank)"
+                        class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                        All IN
                     </button>
                 </div>
             </div>
             <div class="col-6 mt-3">
                 <div class="row justify-content-center mx-3">
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam2(5)" class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 5
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam2(25)" class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 25
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                    <button onclick="betTeam2(100)"
+                        class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
                         Bet 100
                     </button>
-                    <button class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
-                        Bet All
+                    <button onclick="betTeam2(bank)"
+                        class="col-md-5 col-12 btn btn-dark border-secondary m-lg-2 m-2 p-2">
+                        ALL IN
                     </button>
                 </div>
             </div>
