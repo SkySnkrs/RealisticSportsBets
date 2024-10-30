@@ -136,7 +136,9 @@ function randomNumber() {
 }
 
 function highestScore() {
+    if (bank > bankHighScore) {
 
+    }
 }
 
 bankBalance()
