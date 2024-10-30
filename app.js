@@ -1,6 +1,7 @@
 // #region state
 let bank = 100
 let bankHighScore = 0
+let maxBets = 10
 
 const players = [
     { teamNumber: 1, emoji: '🏃‍♂️', skill: 10, name: "D'Marcus Williams" },
@@ -33,6 +34,7 @@ const players = [
 let playerOneElm = document.getElementById('teamOneMembers')
 let playerTwoElm = document.getElementById('teamTwoMembers')
 let bankBal = document.getElementById('bankBalance')
+let highScoreElm = document.getElementById('HighScore')
 
 function findTeam() {
     playerOneElm.innerHTML = ''
@@ -73,13 +75,16 @@ function betTeam1(betSize) {
 
     if (team1Skill > team2Skill) {
         bank += betSize
-        bankBalance()
+
     } else {
         bank -= betSize
-        bankBalance()
-        showLossPopup()
+        checkForLoss()
     }
+    maxBets -= 1
+    bankBalance()
+    highestScore()
     randomNumber()
+    maxBetsLeft()
 }
 
 function betTeam2(betSize) {
@@ -87,41 +92,52 @@ function betTeam2(betSize) {
 
     if (team1Skill < team2Skill) {
         bank += betSize
-        bankBalance()
     } else {
         bank -= betSize
-        bankBalance()
-        showLossPopup()
+        checkForLoss()
     }
+    maxBets -= 1
+    bankBalance()
+    highestScore()
     randomNumber()
+    maxBetsLeft()
 }
 
-function showLossPopup() {
+function checkForLoss() {
     if (bank == 0) {
-        const overlay = document.createElement('div');
-        overlay.className = 'overlay';
-
-
-        const popup = document.createElement('div');
-        popup.className = 'popup';
-        popup.innerHTML = `
-            <p>Game Over! You've lost the game.</p>
-            <button onclick="closePopup()">Close</button>
-        `;
-        overlay.appendChild(popup);
-        document.body.appendChild(overlay);
-
-
-        setTimeout(() => popup.remove(), 5000);
-
-
-        window.closePopup = function () {
-            document.body.removeChild(overlay);
-        };
-
+        showLossPopup("Game Over! You've lost the game.", 'popupLose')
         bank = 100
         bankBalance()
+        randomNumber()
+        maxBets = 10
     }
+}
+
+function showLossPopup(message, color) {
+
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+
+
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.classList.add(color);
+    popup.innerHTML = `
+        <p>${message}</p>
+        <button onclick="closePopup()">Close</button>
+    `;
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+
+
+    setTimeout(() => popup.remove(), 5000);
+
+
+    window.closePopup = function () {
+        document.body.removeChild(overlay);
+    };
+
+
 }
 
 
@@ -130,18 +146,33 @@ function randomNumber() {
         let player = players[i]
         let randomTeamNumber = Math.ceil(Math.random() * 2)
         player.teamNumber = randomTeamNumber
-        console.log(player)
     }
     findTeam()
 }
 
 function highestScore() {
     if (bank > bankHighScore) {
+        bankHighScore = bank;
+        highScoreElm.innerHTML = `${bankHighScore}`;
+    }
+}
 
+function resetHighScore() {
+    highScoreElm.innerHTML = `${bankHighScore}`
+}
+
+function maxBetsLeft() {
+    if (maxBets == 0) {
+        showLossPopup(`Congrats You Have Reached The Max Bets, Your Score Was: ${bank}`, `popupWin`)
+        bank = 100
+        maxBets = 10
+        bankBalance()
+        randomNumber()
     }
 }
 
 bankBalance()
 randomNumber()
+resetHighScore()
 
 //#endregion
